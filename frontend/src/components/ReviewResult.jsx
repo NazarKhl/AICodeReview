@@ -4,12 +4,12 @@ import { Star, Clock, Code2 } from 'lucide-react';
 const ReviewResult = ({ review, rating, timestamp, isLoading }) => {
   if (isLoading) {
     return (
-      <div className="review-result glass-container">
+      <div className="review-result-container">
         <div className="loading-container">
           <div className="loading-spinner"></div>
           <div className="loading-text">
-            <h3>AI аналізує ваш код</h3>
-            <p>Зачекайте, будь ласка<span className="loading-dots">...</span></p>
+            <h3>AI is analyzing your code</h3>
+            <p>Please wait while we process your code<span className="loading-dots">...</span></p>
           </div>
         </div>
       </div>
@@ -18,35 +18,45 @@ const ReviewResult = ({ review, rating, timestamp, isLoading }) => {
 
   if (!review) {
     return (
-      <div className="review-result glass-container">
-        <div className="text-center" style={{padding: '3rem 2rem', color: 'rgba(255,255,255,0.7)'}}>
-          <Code2 size={48} style={{margin: '0 auto 1rem', opacity: 0.5}} />
-          <h3 style={{marginBottom: '0.5rem'}}>Чекаємо на код</h3>
-          <p>Введіть код у редактор для отримання аналізу</p>
+      <div className="review-result-container">
+        <div className="empty-state">
+          <Code2 className="empty-state-icon" />
+          <h3>Waiting for code</h3>
+          <p>Enter your code in the editor to get AI analysis</p>
         </div>
       </div>
     );
   }
 
   const formatTimestamp = (timestamp) => {
-    return new Date(timestamp).toLocaleString('uk-UA');
+    return new Date(timestamp).toLocaleString('en-US');
   };
 
+  // Clean up the review text - remove markdown formatting
+  const cleanReview = review
+    .replace(/\*\*(.*?)\*\*/g, '$1') // Remove bold
+    .replace(/\*(.*?)\*/g, '$1')    // Remove italic
+    .replace(/#{1,6}\s?/g, '')      // Remove headers
+    .replace(/`(.*?)`/g, '$1')      // Remove inline code
+    .replace(/-{3,}/g, '')          // Remove horizontal rules
+    .replace(/^\s*[-*+]\s/gm, '• ') // Convert lists to simple bullets
+    .replace(/\n{3,}/g, '\n\n');    // Limit consecutive newlines
+
   return (
-    <div className="review-result glass-container" style={{padding: '2rem', height: '100%'}}>
+    <div className="review-result-container">
       <div className="review-header">
         <div className="rating">
-          <Star size={24} style={{fill: 'currentColor'}} />
+          <Star size={20} style={{fill: 'currentColor'}} />
           <span>{rating}/10</span>
         </div>
-        <div style={{display: 'flex', alignItems: 'center', gap: '0.5rem', color: 'rgba(255,255,255,0.7)'}}>
+        <div className="flex items-center gap-2" style={{color: 'var(--text-secondary)', fontSize: '0.9rem'}}>
           <Clock size={16} />
-          <span style={{fontSize: '0.9rem'}}>{formatTimestamp(timestamp)}</span>
+          <span>{formatTimestamp(timestamp)}</span>
         </div>
       </div>
       
       <div className="review-content">
-        <div className="review-text">{review}</div>
+        <div className="review-text">{cleanReview}</div>
       </div>
     </div>
   );

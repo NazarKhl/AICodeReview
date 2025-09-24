@@ -11,30 +11,30 @@ const Header = () => {
   ];
 
   return (
-    <header>
-      <div className="container">
-        <div className="flex items-center justify-between">
-          <Link to="/" className="logo">
-            <Code2 className="icon-large" />
-            <span>AI Code Review</span>
-          </Link>
-          <nav className="flex">
-            {navItems.map((item) => {
-              const Icon = item.icon;
-              const isActive = location.pathname === item.path;
-              return (
-                <Link
-                  key={item.path}
-                  to={item.path}
-                  className={isActive ? 'active' : ''}
-                >
-                  <Icon className="icon-small" />
-                  <span>{item.label}</span>
-                </Link>
-              );
-            })}
-          </nav>
-        </div>
+    <header className="header">
+      <div className="header-content">
+        <Link to="/" className="logo">
+          <Code2 className="logo-icon" />
+          <span>AI Code Review</span>
+        </Link>
+        
+        <nav className="nav">
+          {navItems.map((item) => {
+            const Icon = item.icon;
+            const isActive = location.pathname === item.path;
+            
+            return (
+              <Link
+                key={item.path}
+                to={item.path}
+                className={`nav-link ${isActive ? 'active' : ''}`}
+              >
+                <Icon size={18} />
+                <span>{item.label}</span>
+              </Link>
+            );
+          })}
+        </nav>
       </div>
     </header>
   );

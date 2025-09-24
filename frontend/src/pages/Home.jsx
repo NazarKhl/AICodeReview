@@ -16,7 +16,7 @@ const Home = () => {
       const result = await reviewService.submitReview(code, language);
       setCurrentReview(result);
     } catch (err) {
-      setError(err.message || 'Не вдалося проаналізувати код');
+      setError(err.message || 'Failed to analyze code');
     } finally {
       setIsLoading(false);
     }
@@ -25,9 +25,9 @@ const Home = () => {
   return (
     <div className="main-container">
       <div className="hero">
-        <h1 className="hero-title">AI Асистент Аналізу Коду</h1>
+        <h1 className="hero-title">AI Code Review Assistant</h1>
         <p className="hero-subtitle">
-          Отримайте миттєвий AI-аналіз вашого коду з використанням локального Ollama Gemini
+          Get instant AI-powered code analysis using local Ollama Gemini
         </p>
       </div>
 
@@ -39,12 +39,13 @@ const Home = () => {
         <div className="review-result-container">
           {error && (
             <div style={{
-              background: 'rgba(239, 68, 68, 0.2)',
-              border: '1px solid rgba(239, 68, 68, 0.3)',
-              color: 'white',
+              background: 'rgba(239, 68, 68, 0.1)',
+              border: '1px solid rgba(239, 68, 68, 0.2)',
+              color: 'var(--text-primary)',
               padding: '1rem',
-              borderRadius: '12px',
-              marginBottom: '1rem'
+              borderRadius: '8px',
+              marginBottom: '1rem',
+              borderLeft: '4px solid #ef4444'
             }}>
               {error}
             </div>
