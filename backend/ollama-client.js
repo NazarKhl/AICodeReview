@@ -23,34 +23,51 @@ class OllamaClient {
   }
 
   buildPrompt(code, language) {
-    return `
-As an expert code reviewer, analyze the following ${language} code snippet. Provide a comprehensive review covering:
+  return `
+As an expert senior software engineer and mentor, thoroughly analyze the following ${language} code snippet. 
+Provide a detailed, constructive, and actionable review covering the following aspects:
 
-1. Code Quality Assessment:
-   - Code structure and organization
-   - Readability and maintainability
-   - Best practices adherence
+1. **Code Quality and Style**:
+   - Overall readability and clarity of the code
+   - Logical structure and organization of functions/classes
+   - Appropriateness of variable and function names
+   - Consistency in naming conventions, indentation, and spacing
+   - Use of comments where necessary
 
-2. Potential Issues:
-   - Bugs or logical errors
-   - Security vulnerabilities
-   - Performance concerns
+2. **Correctness and Potential Issues**:
+   - Bugs, logical errors, or incorrect outputs
+   - Edge cases that might break the code
+   - Security vulnerabilities or unsafe practices
+   - Performance bottlenecks or inefficient patterns
 
-3. Improvements:
-   - Specific suggestions for optimization
-   - Alternative approaches if applicable
-   - Code style recommendations
+3. **Best Practices and Standards**:
+   - Adherence to ${language} best practices and idioms
+   - Use of modern language features if applicable
+   - Maintainability and scalability considerations
+   - Error handling and defensive programming
 
-4. Overall Rating: Provide a score from 1-10
+4. **Improvement Suggestions**:
+   - Refactoring opportunities for cleaner or shorter code
+   - Alternative approaches or algorithms for better efficiency
+   - Suggestions for improving readability and maintainability
+   - Guidance on naming, commenting, and structuring the code
 
-Code to review (${language}):
+5. **Mentor Notes**:
+   - Friendly explanations of mistakes and how to avoid them
+   - Advice on coding style, design patterns, and software engineering principles
+   - Encouragement for improvement and learning tips
+
+6. **Overall Assessment**:
+   - Provide a score from 1 to 10, with reasoning for the rating
+   - Highlight both strengths and weaknesses
+
+**Code to review (${language}):**
 \`\`\`${language}
 ${code}
 \`\`\`
 
-Please provide your review in a structured format with clear sections.`;
-  }
-
+Please format the review clearly with numbered sections and subpoints. Include examples and suggestions where possible, and write in an educational, mentor-like tone.`;
+}
   parseResponse(response) {
     // Extract rating from response
     const ratingMatch = response.match(/Overall Rating:\s*(\d+)\/10/i);

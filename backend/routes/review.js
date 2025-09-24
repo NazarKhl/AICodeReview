@@ -5,7 +5,6 @@ const { getConnection } = require('../database');
 const router = express.Router();
 const ollama = new OllamaClient();
 
-// Submit code for review
 router.post('/', async (req, res) => {
   try {
     const { code, language } = req.body;
@@ -16,10 +15,8 @@ router.post('/', async (req, res) => {
       });
     }
 
-    // Generate AI review
     const reviewResult = await ollama.generateReview(code, language);
 
-    // Save to database
     const connection = getConnection();
     const [result] = await connection.execute(
       'INSERT INTO reviews (code_snippet, language, review_result, rating) VALUES (?, ?, ?, ?)',
@@ -39,7 +36,6 @@ router.post('/', async (req, res) => {
   }
 });
 
-// Get review history
 router.get('/history', async (req, res) => {
   try {
     const connection = getConnection();
@@ -54,7 +50,6 @@ router.get('/history', async (req, res) => {
   }
 });
 
-// Get specific review
 router.get('/:id', async (req, res) => {
   try {
     const connection = getConnection();
