@@ -47,7 +47,6 @@ const ReviewResult = ({ review, rating, timestamp, isLoading }) => {
       <div className="review-header">
         <div className="rating">
           <Star size={20} style={{fill: 'currentColor'}} />
-          <span>{rating}/10</span>
         </div>
         <div className="flex items-center gap-2" style={{color: 'var(--text-secondary)', fontSize: '0.9rem'}}>
           <Clock size={16} />

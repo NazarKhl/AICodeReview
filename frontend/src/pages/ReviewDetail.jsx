@@ -111,7 +111,6 @@ const ReviewDetail = () => {
             {review.language}
           </span>
           <div style={{ display: 'flex', alignItems: 'center', gap: '0.75rem', color: '#4b5563', fontSize:'0.9rem' }}>
-            <Star style={{ color: '#facc15' }} /> <span>{review.rating}/10</span>
             <Calendar /> <span>{new Date(review.created_at).toLocaleString()}</span>
           </div>
         </div>

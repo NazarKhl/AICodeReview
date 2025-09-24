@@ -69,9 +69,8 @@ ${code}
 Please format the review clearly with numbered sections and subpoints. Include examples and suggestions where possible, and write in an educational, mentor-like tone.`;
 }
   parseResponse(response) {
-    // Extract rating from response
-    const ratingMatch = response.match(/Overall Rating:\s*(\d+)\/10/i);
-    const rating = ratingMatch ? parseInt(ratingMatch[1]) : null;
+    const ratingMatch = response.match(/(?:Overall Rating|Overall Assessment|Score):?\s*(\d+)/i);
+    const rating = ratingMatch ? parseInt(ratingMatch[1]) : 0;
 
     return {
       review: response,
