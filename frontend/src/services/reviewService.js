@@ -20,6 +20,16 @@ class ReviewService {
     const response = await axios.get(`${API_BASE_URL}/review/${id}`);
     return response.data;
   }
+
+  async updateReview(id, updates) {
+    const response = await axios.put(`${API_BASE_URL}/review/${id}`, updates);
+    return response.data;
+  }
+
+  async deleteReview(id) {
+    const response = await axios.delete(`${API_BASE_URL}/review/${id}`);
+    return response.data;
+  }
 }
 
 export const reviewService = new ReviewService();
